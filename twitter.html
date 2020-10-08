@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src='jquery.js'></script>
+<style>
+	body{
+		background-color: #b3c6ff;
+	}
+
+.field{
+	background-color: #ffffff;
+	margin-top:20px;
+	opacity:1;
+
+	}
+.tweet{
+	background-color: #ffffff;
+	opacity:1;
+	margin-top:20px;
+}
+	#page-container{
+	background-color:#e0e0eb;
+	border-radius: 10px ;
+	width:400px;
+	opacity: 0.5;
+	margin:auto;
+	padding:10px;
+
+
+}
+	</style>
+
+</head>
+<body>
+	<div id="page-container">
+		<section id="post">
+			<div class="field">
+				<input placeholder="New Tweet ....">
+				<a href="#" class="icon-twitter">
+				</a>
+			</div>
+		</section>
+		<section id="tweets">
+			<div class="tweet">
+				<img src="">
+				<h3>Joe Flamming </h3>
+				<p> you better bring it tonight with that jquery </p>
+			</div>
+			<div class="tweet">
+				<img src="">
+				<h3>Paul Irish </h3>
+				<p>I made </p>
+
+			
+		</section>
+	</div>
+	<script >
+		$(document).ready(function(){
+			var tweets=$('<div>Test</div>');
+			$('#tweets').append(tweets);
+
+		})
+	</script>
+</body>
+</html>

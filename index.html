@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery.js"></script>
+    <script src="data_generator.js"></script>
+    <style>
+     body{
+      background : url('https://meetedgar.com/wp-content/uploads/2017/05/Twitter-Blog-Image-Header-02.png')no-repeat fixed  
+;         
+
+     }
+     .divch{
+      background-color: white;
+      width:600px;
+      height:180px;
+      margin:30px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 10px 5px #4682B4;
+      color:black;
+      opacity: 0.5;
+      margin-left:700px;
+
+     }
+     .avatar{
+      width:50px;
+      height: 50px
+     }
+     #newtweet{
+    
+ position:absolute;
+      margin-left: 150px
+
+     }
+     input  , #add{
+      opacity: 0.5;
+      position:absolute;
+      margin-left: 150px
+     }
+ #ref img{
+    width:140px;
+    height:140px;
+    position: absolute;
+
+    margin-left:1200px;
+  }
+  h4{
+  color: #00008B;
+  font-family:  serif;
+  font-size:18px;
+
+
+  }
+  p{
+    font-size:14px;
+    font-weight:bold;
+  }
+.like{
+  width:30px;
+  height:30px;
+  margin-left:500px;
+}
+
+#like{
+width:0.001px;
+height:0.001px;
+  margin-left:00px
+
+}
+
+
+
+    </style>
+  
+  
+
+  </head>
+  <body>
+<button id="ref"><img src="https://media.sproutsocial.com/uploads/2015/11/search-twitter-history.svg"></button>
+<br>
+<input type="text"  id="newuser"><br><br>
+<input type="text" id="newtweet"><br><br>
+<button id="add">add</button>
+<br><br>
+
+<div> </div>
+    <script>
+
+      $(document).ready(function(){
+        var $div = $('div');
+         $div.html('');
+          
+      var index = streams.home.length - 1;
+        while(index >= 0){
+          var tweet = streams.home[index];
+          var $tweet = $('<div class="divch"><button id="like"><img class="like" src="https://st.depositphotos.com/1005920/4793/i/450/depositphotos_47937867-stock-photo-twitter-glossy-web-icon.jpg"></button><h4 class="myuser"></h4><p class="mymsg"></p><p class="date"></p></div>');
+          $('.mymsg').text(tweet.message +' ');
+         $('.myuser').text('@'+tweet.user+':')
+         $('.date').text(tweet.created_at)
+          $tweet.appendTo($div);
+          index -= 1;
+        }
+   
+   $('#ref').click(function(){
+    var $div = $('div');
+         $div.html('');
+
+   var index = streams.home.length - 1;
+        while(index >= 0){
+          var tweet = streams.home[index];
+          var $tweet = $('<div class="divch"><h4>@'+tweet.user+':</h4><p>'+tweet.message+'</p><p>'+tweet.created_at+'</p></div>');
+          //$('.mymsg').text(tweet.message +' '+tweet.created_at);
+         //$('.myuser').text('@'+tweet.user+':')
+          $tweet.appendTo($div);
+          index -= 1;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+        }
+     
+  })
+   $('#add').click(function(){
+    var mytweet=$('#newtweet').val()
+    var myuser=$('#newuser').val()
+    var d = new Date();
+   var $newtweet=$('<div class="divch"><img class="avatar"src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3a832167-53b5-4bf7-a608-4bb43599c8a9/dcehdit-7f00428c-f549-4394-8523-40914fe1f894.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvM2E4MzIxNjctNTNiNS00YmY3LWE2MDgtNGJiNDM1OTljOGE5XC9kY2VoZGl0LTdmMDA0MjhjLWY1NDktNDM5NC04NTIzLTQwOTE0ZmUxZjg5NC5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.JG9aZ7lRsnooAWob3hn2wyb36mngv-obSJAa_Ue_DVs"><h4 >@'+myuser+':</h4> <p>'+mytweet+'</p>'+d+' <p></div>')
+  
+    //$newtweet.text('@ '+myuser+' : '+mytweet)
+    $newtweet.prependTo($div)
+       })
+
+$('.myuser').click(function(event){
+   var $div = $('div');
+         $div.html('');
+  var array=[]
+    for(var i=0;i<streams.home.length;i++){
+      console.log(event.target.textContent)
+      var element=event.target.textContent.slice(1)
+      var element1=element.slice(0,-1)
+      console.log(element1);
+      if(element1===streams.home[i].user){
+        array.push(streams.home[i])
+      }
+
+    }
+   
+    for(var j=0;j<array.length;j++){
+       console.log(array[j].message)
+   var $tweet=$('<div class="divch"><h4 >'+array[j].user+'</h4> <p>'+array[j].message+'</p><p>'+array[j].created_at+'</p> </div>')
+    
+ // $(usr).text('@'+array[j].user+':')
+  //console.log ("vvv",$("#user").text())
+  //$(msg).text(array[j].message)
+     $tweet.appendTo($div);
+    }
+})
+    var array=$('.divch')
+    var array2=["https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d8ab6559-f3d3-4d15-9294-b8892aaa99e0/dc7myhg-02944196-d47e-4aa3-8608-e8d924b2d66e.png/v1/fill/w_1024,h_1024,strp/avatar_profil_by_jeje90an_dc7myhg-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvZDhhYjY1NTktZjNkMy00ZDE1LTkyOTQtYjg4OTJhYWE5OWUwXC9kYzdteWhnLTAyOTQ0MTk2LWQ0N2UtNGFhMy04NjA4LWU4ZDkyNGIyZDY2ZS5wbmciLCJoZWlnaHQiOiI8PTEwMjQiLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS53YXRlcm1hcmsiXSwid21rIjp7InBhdGgiOiJcL3dtXC9kOGFiNjU1OS1mM2QzLTRkMTUtOTI5NC1iODg5MmFhYTk5ZTBcL2plamU5MGFuLTQucG5nIiwib3BhY2l0eSI6OTUsInByb3BvcnRpb25zIjowLjQ1LCJncmF2aXR5IjoiY2VudGVyIn19.WhVerPP2Ok0lnlrdRboT3ubpj7xSBMJVfmCsmLLNEDI","https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d8ab6559-f3d3-4d15-9294-b8892aaa99e0/dc7nava-255b055c-b60a-43d4-a592-6123cae2c01b.jpg/v1/fill/w_1024,h_1024,q_75,strp/avatar_profil_by_jeje90an_dc7nava-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvZDhhYjY1NTktZjNkMy00ZDE1LTkyOTQtYjg4OTJhYWE5OWUwXC9kYzduYXZhLTI1NWIwNTVjLWI2MGEtNDNkNC1hNTkyLTYxMjNjYWUyYzAxYi5qcGciLCJoZWlnaHQiOiI8PTEwMjQiLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS53YXRlcm1hcmsiXSwid21rIjp7InBhdGgiOiJcL3dtXC9kOGFiNjU1OS1mM2QzLTRkMTUtOTI5NC1iODg5MmFhYTk5ZTBcL2plamU5MGFuLTQucG5nIiwib3BhY2l0eSI6OTUsInByb3BvcnRpb25zIjowLjQ1LCJncmF2aXR5IjoiY2VudGVyIn19.-MafhrgzTcQub45dXtWhNm8TGC3NrhNwLloepvq-KbA","https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d8ab6559-f3d3-4d15-9294-b8892aaa99e0/dc7nt5b-c413ed46-4f95-41b7-bcfb-641b31d792d2.jpg/v1/fill/w_1024,h_1024,q_75,strp/avatar_profil_by_jeje90an_dc7nt5b-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvZDhhYjY1NTktZjNkMy00ZDE1LTkyOTQtYjg4OTJhYWE5OWUwXC9kYzdudDViLWM0MTNlZDQ2LTRmOTUtNDFiNy1iY2ZiLTY0MWIzMWQ3OTJkMi5qcGciLCJoZWlnaHQiOiI8PTEwMjQiLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS53YXRlcm1hcmsiXSwid21rIjp7InBhdGgiOiJcL3dtXC9kOGFiNjU1OS1mM2QzLTRkMTUtOTI5NC1iODg5MmFhYTk5ZTBcL2plamU5MGFuLTQucG5nIiwib3BhY2l0eSI6OTUsInByb3BvcnRpb25zIjowLjQ1LCJncmF2aXR5IjoiY2VudGVyIn19.asHCK2DARduYELlPkW37jSju55XfAgw_h5KojpXXkjU","https://image.freepik.com/vecteurs-libre/jeune-femme-avatar-dessin-anime-personnage-photo-profil_18591-55057.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQqbxz8YxJJlLPyfdKLtqbb-vQinCsBwakNgA&usqp=CAU","https://previews.123rf.com/images/jemastock/jemastock1712/jemastock171212588/92283189-belle-femme-profil-dessin-anim%C3%A9-ic%C3%B4ne-vector-illustration-graphisme.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRALKp5r3bzXa4pNjM3_yQF7648We5nFZNYrw&usqp=CAU","https://image.freepik.com/vecteurs-libre/profil-personnage-dessin-anime-avatar-homme-affaires_18591-50588.jpg","https://pickaface.net/gallery/avatar/CleanGamingMods5217c4a1ca73d.png","https://www.meme-arsenal.com/memes/2b524eb4ecb21f138223e56cf840d0c3.jpg"]
+    for(var i=0;i<array2.length;i++){
+     $('<img class="avatar"src='+array2[i]+'>').prependTo($('.divch')[i])
+    }
+    $('<div class="divch"><img  id="like" src="https://banner2.cleanpng.com/20190826/hgk/transparent-social-network-icon-twitter-icon-5d66ad1ad5cba7.4066550915670100748757.jpg"></div>')
+     $('#like').hide
+   $('#like').click(function(){
+   $('#like').show()
+   })
+   })
+
+
+
+    </script>
+  </body>
+</html>
